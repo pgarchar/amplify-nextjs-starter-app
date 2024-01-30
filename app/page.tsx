@@ -1,14 +1,15 @@
-import Head from 'next/head'
+import Image from 'next/image'
 import styles from './page.module.css'
+import LeftSide from './form'
 
-export default function page() {
+export default function Page() {
       return (
         <div className={styles.container}>
-            <Head>
+            <Image>
                 <title>Waitlist</title>
                 <meta name="description" content="A quick, scalable waitlist"/>
                 <link rel="icon" href="/favicon.ico"/>
-            </Head>
+            </Image>
 
             // New components
             <LeftSide/>
@@ -18,19 +19,6 @@ export default function page() {
 }
 
 // These functions can be moved into their own files
-function LeftSide() {
-    return <div className={styles.column}>
-        <img width="154" height="27" src="/logo.svg"/>
-        <h1 className={styles.title}>
-            Quick Scalable<br/>
-            <span className={styles.titleKeyword}>Waitlist</span>
-        </h1>
-        <div className={styles.subtitle}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua.
-        </div>
-    </div>
-}
 
 function RightSide() {
     return <div className={styles.column}>
