@@ -1,7 +1,7 @@
 // import Image from 'next/image'
 import styles from './page.module.css';
 
-export function LeftSide() {
+export default function LeftSide{
     return <div className={styles.column}>
         {/* same as before */}
         <Form />
