@@ -1,14 +1,14 @@
-import Image from 'next/image'
+import Head from 'next/head'
 import styles from './page.module.css'
 
-export default function Page() {
+export default function page() {
       return (
         <div className={styles.container}>
-            <Image>
+            <Head>
                 <title>Waitlist</title>
                 <meta name="description" content="A quick, scalable waitlist"/>
                 <link rel="icon" href="/favicon.ico"/>
-            </Image>
+            </Head>
 
             // New components
             <LeftSide/>
