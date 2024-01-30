@@ -4,11 +4,11 @@ import styles from './page.module.css'
 export default function Page() {
       return (
         <div className={styles.container}>
-            <Head>
+            <Image>
                 <title>Waitlist</title>
                 <meta name="description" content="A quick, scalable waitlist"/>
                 <link rel="icon" href="/favicon.ico"/>
-            </Head>
+            </Image>
 
             // New components
             <LeftSide/>
