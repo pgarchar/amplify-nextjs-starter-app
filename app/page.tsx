@@ -1,6 +1,7 @@
 'use client';
+
 // Importing React and other necessary modules
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './page.module.css';
 
 // Main Page Component
@@ -18,7 +19,7 @@ export default function Page() {
             <LeftSide />
             <RightSide />
         </div>
-    )
+    );
 }
 
 // LeftSide Component
@@ -36,7 +37,7 @@ function LeftSide() {
             </div>
             <Form />
         </div>
-    )
+    );
 }
 
 // RightSide Component
@@ -45,19 +46,19 @@ function RightSide() {
         <div className={styles.column}>
             <img width="100%" height="100%" src="/code.svg" alt="Code" />
         </div>
-    )
+    );
 }
 
 // Form Component
 function Form() {
     const [email, setEmail] = useState("");
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null); // Specify that error can be a string or null
 
-    const submit = async (e) => {
+    async function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            let response = await fetch(".waitlist", {
+            let response = await fetch("/api/waitlist", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ function Form() {
         } catch (error) {
             setError("An error occurred while submitting the form.");
         }
-    };
+    }
 
     // If the user successfully submitted their email,
     // display a thank you message
