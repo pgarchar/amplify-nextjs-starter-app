@@ -1,5 +1,4 @@
 'use client';
-// Importing React and other necessary modules
 import React, { useState } from 'react';
 import styles from './page.module.css';
 import { Amplify } from 'aws-amplify';
@@ -8,7 +7,6 @@ import { uploadToS3 } from './s3uploader';
 
 Amplify.configure(config);
 
-// Head element with meta tags
 const HeadElement: React.FC = () => (
   <head>
     <title>Waitlist</title>
@@ -17,7 +15,6 @@ const HeadElement: React.FC = () => (
   </head>
 );
 
-// LeftSide Component
 const LeftSide: React.FC = () => (
   <div className={styles.column}>
     <img width="154" height="27" src="/logo.svg" alt="Logo" />
@@ -33,20 +30,18 @@ const LeftSide: React.FC = () => (
   </div>
 );
 
-// RightSide Component
 const RightSide: React.FC = () => (
   <div className={styles.column}>
     <img width="100%" height="100%" src="/code.svg" alt="Code" />
   </div>
 );
 
-// Form Component
-const Form: React.FC = () => {
+function Form() {
   const [email, setEmail] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function submit(e: React.FormEvent<HTMLFormElement>) {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch("/api/waitlist", {
@@ -69,7 +64,7 @@ const Form: React.FC = () => {
     } catch (error) {
       setError("An error occurred while submitting the form.");
     }
-  }
+  };
 
   const thankYouMessage = (
     <div className={styles.formWrapper}>
@@ -79,12 +74,6 @@ const Form: React.FC = () => {
     </div>
   );
 
-  // If the user successfully submitted their email, display a thank you message
-  if (hasSubmitted) {
-    return thankYouMessage;
-  }
-
-  // Otherwise, display the form
   return (
     <form className={styles.formWrapper} onSubmit={submit}>
       <input
@@ -101,12 +90,12 @@ const Form: React.FC = () => {
       >
         Join Waitlist
       </button>
+      {hasSubmitted ? thankYouMessage : null}
       {error ? <div className={styles.error}>{error}</div> : null}
     </form>
   );
-};
+}
 
-// Main Page Component
 const Page: React.FC = () => (
   <div className={styles.container}>
     <HeadElement />
@@ -116,3 +105,4 @@ const Page: React.FC = () => (
 );
 
 export default Page;
+
