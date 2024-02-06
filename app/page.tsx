@@ -3,6 +3,14 @@
 // Importing React and other necessary modules
 import React, { useState } from 'react';
 import styles from './page.module.css';
+import { Amplify } from 'aws-amplify';
+import config from '@/amplifyconfiguration.json';
+import { uploadToS3 } from './s3uploader';
+
+
+Amplify.configure(config);
+
+
 
 // Main Page Component
 export default function Page() {
@@ -53,7 +61,7 @@ function RightSide() {
 function Form() {
     const [email, setEmail] = useState("");
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [error, setError] = useState<string | null>(null); // Specify that error can be a string or null
+    const [error, setError] = useState<string | null>(null);
 
     async function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -68,6 +76,12 @@ function Form() {
 
             if (response.ok) {
                 setHasSubmitted(true);
+
+                // Assuming you want to upload to S3 after a successful API request
+                await uploadToS3({
+                    key: 'waitlist', // Specify your S3 key/path for the uploaded file
+                    data: { email: email, otherData: 'value' }, // Adjust data as needed
+                });
             } else {
                 setError(await response.text());
             }
