@@ -1,10 +1,10 @@
 import { S3 } from 'aws-sdk';
 
 // Replace these values with your S3 bucket details
-const bucketName = 'grapevinewaitlist';
+const bucketName = 'gvwaitlist';
 const region = 'us-east-1';
-const accessKeyId = 'AKIA25TNZ25HPHCC5UER';
-const secretAccessKey = 'LzATa7tvKEKe+8O+PrYJ0Bta4NpW9cgVwH6GKYUR';
+const accessKeyId = 'AKIA25TNZ25HENZVDMB2';
+const secretAccessKey = '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';
 
 
 const s3 = new S3({
@@ -18,7 +18,7 @@ interface UploadParams {
   data: Record<string, any>;
 }
 
-export const uploadToS3 = async ({ key, data }: UploadParams) => {
+export const uploadToS3= async ({ key, data }: UploadParams) => {
   try {
     const params = {
       Bucket: bucketName,
